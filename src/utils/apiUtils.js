@@ -1,4 +1,4 @@
-const URL = 'http://localhost:8080/CA2_war_exploded/api';
+const URL = 'http://localhost:8080/CA2Backend_war_exploded/api';
 
 const apiUtils = () => {
 
