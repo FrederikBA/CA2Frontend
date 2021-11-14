@@ -5,6 +5,7 @@ import apiUtils from "../utils/apiUtils"
 
 const Gallery = () => {
   const [artCollection, setArtCollection] = useState([]);
+  const [painting, setPainting] = useState("");
 
   const URL = apiUtils.getUrl()
   const galleryName = useParams().id
@@ -18,16 +19,17 @@ const Gallery = () => {
   }, [URL, galleryName]);
 
   useEffect(() => {
-    const getAnimals = () => {
-      const response = await.axios.get(URL + '/animals')
-      console.log(response.data);
+    const getAnimals = async () => {
+      const response = await axios.get(URL + '/animals')
+      setPainting(response.data.duckDTO.url);
     }
-  }, []);
+    getAnimals()
+  }, [URL]);
 
   return (
-    <div>
+    <div class="centered">
       <h1>This is the art collection of {galleryName}</h1>
-      <ul>{artCollection.map((a) => <li key={a.id}>{a.name}</li>)}</ul>
+      {artCollection.map((a) => <div className="frame" key={a.id}><img className="painting" src={painting} alt="" /> <p className="painting-title">{a.year + ", " + a.artist + ", " + "'" + a.name + "'"}</p></div>)}
     </div>
   )
 }
