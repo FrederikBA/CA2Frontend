@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const URL = 'http://localhost:8080/CA2Backend_war_exploded/api';
 
 const apiUtils = () => {
@@ -6,8 +8,18 @@ const apiUtils = () => {
         return URL;
     }
 
+    const getAuthAxios = () => {
+        const authAxios = axios.create({
+            headers: {
+                'x-access-token': localStorage.getItem('jwtToken')
+            }
+        })
+        return authAxios
+    }
+
     return {
         getUrl,
+        getAuthAxios
     }
 }
 

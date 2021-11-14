@@ -1,13 +1,43 @@
-import authUtils from "../utils/authUtils"
+import apiUtils from "../utils/apiUtils"
+import { useState, useEffect } from "react"
 
 const Admin = ({ currentRoles }) => {
-  const username = localStorage.getItem('user')
+  const [artPieces, setArtPieces] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
+  const URL = apiUtils.getUrl()
+
+  useEffect(() => {
+    const getArtPieces = async () => {
+      try {
+        const response = await apiUtils.getAuthAxios().get(URL + '/art/all')
+        setArtPieces(response.data.artCollection);
+        setErrorMessage('')
+      } catch {
+        setErrorMessage('You do not have the required role')
+      }
+    }
+    getArtPieces()
+  }, [URL]);
 
   return (
     <div>
-      {authUtils.handleAccess('admin', currentRoles) ? < h1 > Welcome {username}, this is the admin page. Only users with the role: 'admin' may access this.</h1> : (<h1>You do not have the correct role to view this page</h1>)}
-    </div >
+      <h2>{errorMessage}</h2>
+      <table className="table table">
+        <thead className="mt-head">
+          <tr>
+            <th>ID</th>
+            <th>Year</th>
+            <th>Artist</th>
+            <th>Name</th>
+            <th>URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {artPieces.map((a => <tr><td>{a.id}</td><td>{a.year}</td><td>{a.artist}</td><td>{a.name}</td><td>{a.imageUrl}</td></tr>))}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
