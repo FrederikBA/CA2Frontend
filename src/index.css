@@ -55,3 +55,11 @@ ul.header li a:hover:not(.active) {
   font-weight: bold;
   font-size: 16px;
 }
+
+.centered {
+  text-align: center;
+}
+
+.homebtn {
+  width: 200px;
+}

@@ -8,6 +8,7 @@ import LandingPage from './components/LandingPage';
 import User from './components/User';
 import Admin from './components/Admin';
 import NoMatch from './components/NoMatch';
+import Gallery from './components/Gallery';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,6 +23,7 @@ function App() {
         <Route path='landing-page' element={<LandingPage currentRoles={currentRoles} setCurrentRoles={setCurrentRoles} />} />
         <Route path='user' element={<User currentRoles={currentRoles} />} />
         <Route path='admin' element={<Admin currentRoles={currentRoles} />} />
+        <Route path='/:id' element={<Gallery />} />
         <Route path='*' element={<NoMatch />} />
       </Routes>
     </div >
