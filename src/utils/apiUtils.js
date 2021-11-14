@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = 'http://localhost:8080/CA2Backend_war_exploded/api';
+const URL = 'https://frederikcphb.dk/tomcat/CA2/api';
 
 const apiUtils = () => {
 
